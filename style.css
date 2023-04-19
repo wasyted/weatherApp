@@ -1,0 +1,278 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*Stylesheet*/
+body{
+  height: 100vh;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 20px;
+  box-shadow: 0px 10px 30px #1212123a;
+  background-color: #607D8B;
+  color: #FFFFFF;
+}
+
+header div:first-of-type{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header div:first-of-type img{
+  filter: invert();
+}
+
+header div button:last-of-type{
+  width: 20px;
+  height: 20px;
+  background-color: none;
+}
+
+button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  height: 30px;
+  width: 30px;
+  background-color: #12121200;
+  border: none;
+}
+
+div button:last-of-type img{
+  width: 20px;
+  height: 20px;
+}
+
+header h1{
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 1rem;
+  font-weight: bolder;
+}
+
+input{
+  width: 70%;
+  height: 24px;
+  border-radius: 5px;
+  border: #1212123a solid 1px;
+}
+
+.content{
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.location-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.location-container h2{
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 1rem;
+  font-weight: bolder;
+}
+
+.weather-container{
+  padding-top: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.weather-card{
+  width: 6rem;
+  height: 8rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: min-content 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+  border-radius: 30px;
+  box-shadow: 0px 10px 30px 2px #1212125e;
+  padding: 10px;
+}
+
+.weather-card .day{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.weather-card h1{
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: 1.2rem;
+  font-weight: bolder;
+}
+
+.weather-icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.weather-icon img{
+  width: 3rem;
+  height: 3rem;
+}
+
+.max{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  grid-column-start: 0;
+  grid-column-end: 2;
+  font-family: 'SF Pro Display', sans-serif;
+}
+
+.min{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  font-family: 'SF Pro Display', sans-serif;
+}
+
+/* .actual{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  font-family: 'SF Pro Display', sans-serif;
+} */
+
+.max h2{
+  color: rgb(255,0,0);
+  font-size: 0.6rem;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: bolder;
+}
+
+.min h2{
+  color: rgb(0, 0, 255);
+  font-size: 0.6rem;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: bolder;
+}
+
+.actual h2{
+  color: rgb(0, 0, 0);
+  font-size: 0.6rem;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: bolder;
+}
+
+h3{
+  color: rgb(0, 0, 0);
+  font-size: 0.8rem;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 200;
+}
+
+.dropdown-menu{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #607d8b87;
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: bolder;
+  transition: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+}
+
+.dropdown-menu ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.dropdown-menu ul li{
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: #12121218 solid 1px;
+}
+
+.invisible{
+  opacity: 0;
+  position: absolute;
+  top: -1000px;
+}
