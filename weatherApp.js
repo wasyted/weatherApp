@@ -19,7 +19,7 @@ const updateWeather = (weatherData) =>{
 }
 
 async function getWeather(location){
-  const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=fd9968291ee44909811121131231704&q=${location}&days=7&aqi=no&alerts=no`, {mode: 'cors'})
+  const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=fd9968291ee44909811121131231704&q=${location}&days=7&aqi=no&alerts=no`/*, {mode: 'cors'}*/)
   const weatherData = await response.json();
   return weatherData;
   // actual.textContent = `${weatherData.current.temp_c}°C`;
