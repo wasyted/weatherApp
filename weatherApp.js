@@ -58,6 +58,34 @@ const displayCards = () =>{
   }
 }
 
+const hideCards = () => {
+  for(let i=0;i<7;i++){
+    const dayContainer = document.getElementsByClassName(`day ${i}`)
+    const iconContainer = document.getElementsByClassName(`weather-icon ${i}`)
+    const maxContainer = document.getElementsByClassName(`max ${i}`)
+    const minContainer = document.getElementsByClassName(`min ${i}`)
+    const actualContainer = document.getElementsByClassName(`actual ${i}`)
+    dayContainer[0].remove();
+    iconContainer[0].remove();
+    maxContainer[0].remove();
+    minContainer[0].remove();
+    // if(i == 0){
+    //   actualContainer[0].remove();
+    // }
+    weatherContainer.removeChild(weatherContainer.lastChild)
+  }
+}
+
+const displayTodayCard = () => {
+  const todayCard = document.createElement('div');
+  todayCard.classList = 'today-card';
+  todayCard.innerHTML = "<h1></h1>";
+  todayCard.innerHTML += `<img id='weather-icon' scr=''></img>`;
+  todayCard.innerHTML += `<h2>Max</h2><h3></h3>`;
+  todayCard.innerHTML += `<h2>Min</h2><h3></h3>`;
+  weatherContainer.appendChild(todayCard)
+}
+
 const displayLocation = () => {
   const locationContainer = document.querySelector('.location-container');
   const city = document.createElement('h2');
@@ -104,6 +132,13 @@ searchBar.addEventListener('blur',async ()=>{
   let weatherData = await getWeather(searchBar.value)
   updateWeather(weatherData);
 });
+
+const todayForecastButton = document.querySelector('.today-forecast-button');
+
+todayForecastButton.addEventListener('click', async ()=>{
+  hideCards();
+  displayTodayCard();
+})
 
 dropDownMenu(".dropdown-menu","#dropdown-menu-button");
 displayLocation();
