@@ -5,30 +5,163 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <title>weatherApp</title>
 </head>
 <body>
-  <header>
-    <div>
-      <button id="dropdown-menu-button"><img src="https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/nest_farsight_weather/default/48px.svg" alt=""></button>
-      <input class="search-bar" type="text" placeholder="Search location">
-      <button><img src="https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/search/wght700/48px.svg"></img></button>
+  <div class="content">
+    <header>
+      <button id="dropdown-button"><img src="./src/icons/menu_FILL0_wght400_GRAD0_opsz48.svg" alt="" srcset=""></button>
+      <h3 id="location-container">Quilmes, Buenos Aires</h3>
+    </header>
+    <div class="today-forecast">
+      <div class="forecast-container">
+        <div class="weather-image">
+          <div>
+            <img id="weather-icon" src="./src/weather/cloudy_FILL0_wght400_GRAD0_opsz48.svg" alt="forecast-image">
+          </div>
+          <img src="./src/weather/background.png" alt="">
+        </div>
+        <h2>Today's report: <br><br>Cloudy with small chance of rain</h2>
+        <div class="temp-container">
+          <div class="today-min">
+            <h2>Min</h2>
+          <h1 id="today-min">8<span>°</span></h1>
+          </div>
+          <div class="today-now">
+            <h2>Now</h2>
+          <h1 id="today-now">19<span>°</span></h1>
+          </div>
+          <div class="today-max">
+            <h2>Max</h2>
+            <h1 id="today-max">21<span>°</span></h1>
+          </div>
+        </div>
+        <div class="info-container">
+          <ul>
+            <li>
+              <img src="./src/icons/air_FILL1_wght700_GRAD0_opsz48.svg" alt="wind-icon">
+              <h3 id="today-wind">23 km/h</h3>
+              <h3>Wind speed</h3>
+            </li>
+            <li>
+              <img src="./src/icons/humidity_mid_FILL1_wght700_GRAD0_opsz48.svg" alt="humidity-icon">
+              <h3 id="today-humidity">30 %</h3>
+              <h3>Humidity</h3>
+            </li>
+            <li>
+              <img src="./src/icons/rainy_light_FILL1_wght700_GRAD0_opsz48.svg" alt="rain-icon">
+              <h3 id="today-rain-chance">5%</h3>
+              <h3>Chance of Rain</h3>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div>
-      <h1>weatherApp</h1>
+    <div class="seven-day-forecast hidden">
+      <h1>7 Day Forecast</h1>
+      <div>
+        <div class="day-card today">
+          <h3>1-1</h3>
+          <img src="src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg" alt="">
+          <h3>Max: <span id="today-max"></span></h3>
+          <h3>Min: 13°</h3>
+          <h3>Rain: 2%</h3>
+        </div>
+      </div>
+      <div>
+        <div class="day-card 0">
+          <h3>1-1</h3>
+          <img src="src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg" alt="">
+          <h3 id="max 0">Max: 20°</h3>
+          <h3 id="min 0">Min: 13°</h3>
+          <h3 id="rain 0">Rain: 2%</h3>
+        </div>
+        <div class="day-card 1">
+          <h3>1-1</h3>
+          <img src="src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg" alt="">
+          <h3 id="max 1">Max: 20°</h3>
+          <h3 id="min 1">Min: 13°</h3>
+          <h3 id="rain 1">Rain: 2%</h3>
+        </div>
+        <div class="day-card 2">
+          <h3>1-1</h3>
+          <img src="src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg" alt="">
+          <h3 id="max 2">Max: 20°</h3>
+          <h3 id="min 2">Min: 13°</h3>
+          <h3 id="rain 2">Rain: 2%</h3>
+        </div>
+        <div class="day-card 3">
+          <h3>1-1</h3>
+          <img src="src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg" alt="">
+          <h3 id="max 3">Max: 20°</h3>
+          <h3 id="min 3">Min: 13°</h3>
+          <h3 id="rain 3">Rain: 2%</h3>
+        </div>
+        <div class="day-card 4">
+          <h3>1-1</h3>
+          <img src="src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg" alt="">
+          <h3 id="max 4">Max: 20°</h3>
+          <h3 id="min 4">Min: 13°</h3>
+          <h3 id="rain 4">Rain: 2%</h3>
+        </div>
+        <div class="day-card 5">
+          <h3>1-1</h3>
+          <img src="src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg" alt="">
+          <h3 id="max 5">Max: 20°</h3>
+          <h3 id="min 5">Min: 13°</h3>
+          <h3 id="rain 5">Rain: 2%</h3>
+        </div>
+      </div>
     </div>
-  </header>
-  <div class="dropdown-menu">
-    <ul>
-      <li><h2 id="today-forecast-button">Today's forecast</h2></li>
-      <li><h2 id="seven-day-forecast-button">7 Days forecast</h2></li>
-    </ul>
-  </div>
-  <div class="content"> 
-    <div class="location-container">
+    <div class="search-content hidden">
+      <form action="#">
+        <label for="city">City: </label>
+        <input type="text" class="search-input" name="city" id="city" placeholder="Quilmes">
+        <label for="region">Region: </label>
+        <input type="text" class="search-input" name="region" id="region" placeholder="Buenos Aires">
+        <label for="country">Country: </label>
+        <input type="text" class="search-input" name="country" id="country" placeholder="Argentina">
+        <button type="submit">Search</button>
+      </form>
     </div>
-    <div class="weather-container">
+    <div class="settings-content hidden">
+      <div class="theme">
+        <h1>Dark Theme</h1>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider round"></span>
+      </label>
+      <h1>Light Theme</h1>
+      </div>
+      <div class="units">
+        <h1>Metric (C°)</h1>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider round"></span>
+      </label>
+      <h1>Imperial (F°)</h1>
+      </div>
+    </div>
+    <footer>
+      <button id="home"><img src="./src/icons/home_FILL1_wght700_GRAD0_opsz48.svg" alt="" srcset=""></button>
+      <button id="search"><img src="./src/icons/search_FILL1_wght700_GRAD0_opsz48.svg" alt="" srcset=""></button>
+      <button id="seven-day"><img src="./src/icons/filter_7_FILL0_wght400_GRAD0_opsz48.svg" alt="" srcset=""></button>
+      <button id="settings"><img src="./src/icons/settings_FILL1_wght700_GRAD0_opsz48.svg" alt="" srcset=""></button>
+    </footer>
+    <div class="overlay">
+      <div class="overlay-content">
+        <img src="./src/weather/partly_cloudy_day_FILL0_wght400_GRAD0_opsz48.svg" alt="">
+        <h1>Discover the weather in your city</h1>
+        <h2>Get to know the temperature, rain chance, wind speed and more</h2>
+        <button id="get-started">Get started</button>
+      </div>
     </div>
   </div>
   <script src="weatherApp.js"></script>

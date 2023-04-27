@@ -1,146 +1,234 @@
-const updateWeather = (weatherData) =>{
-  for(let i=0;i<7;i++){
-    const date = document.getElementsByClassName(`day ${i}`)
-    const icon = document.getElementsByClassName(`weather-icon ${i}`)
-    const max = document.getElementsByClassName(`max ${i}`)
-    const min = document.getElementsByClassName(`min ${i}`)
-    const actual = document.getElementsByClassName(`actual ${i}`)
-    let iconUrl = weatherData.forecast.forecastday[i].day.condition.icon;
-    icon[0].firstChild.src = `https://${iconUrl}`;
-    date[0].firstChild.textContent = `${weatherData.forecast.forecastday[i].date.substring(5)}`;
-    max[0].lastChild.textContent = `${weatherData.forecast.forecastday[i].day.maxtemp_c}°C`;
-    min[0].lastChild.textContent = `${weatherData.forecast.forecastday[i].day.mintemp_c}°C`;
-    // if(index == 0){
-    //   actual[0].lastChild.textContent = `${weatherData.current.temp_c}°C`;
-    // }
-    updateLocationDOM(weatherData)
-} 
-  console.log(weatherData)
-}
+const getStarted = document.querySelector('#get-started');
+const overlay = document.querySelector('.overlay');
+getStarted.addEventListener('click', ()=>{
+  overlay.classList.toggle('hidden');
+})
+
+const home = document.querySelector('#home');
+const todayForecastContent = document.querySelector('.today-forecast');
+home.addEventListener('click', ()=>{
+  searchContent.classList.add('hidden');
+  sevenDaysContent.classList.add('hidden');
+  todayForecastContent.classList.remove('hidden');
+  settingsContent.classList.add('hidden');
+});
+
+const search = document.querySelector('#search');
+const searchContent = document.querySelector('.search-content');
+search.addEventListener('click', ()=>{
+  searchContent.classList.remove('hidden');
+  sevenDaysContent.classList.add('hidden');
+  todayForecastContent.classList.add('hidden');
+  settingsContent.classList.add('hidden');
+});
+
+const sevenDays = document.querySelector('#seven-day');
+const sevenDaysContent = document.querySelector('.seven-day-forecast');
+sevenDays.addEventListener('click', ()=>{
+  sevenDaysContent.classList.remove('hidden');
+  todayForecastContent.classList.add('hidden');
+  searchContent.classList.add('hidden');
+  settingsContent.classList.add('hidden');
+});
+
+const settings = document.querySelector('#settings');
+const settingsContent = document.querySelector('.settings-content ');
+settings.addEventListener('click', ()=>{
+  settingsContent.classList.remove('hidden');
+  todayForecastContent.classList.add('hidden');
+  searchContent.classList.add('hidden');
+  sevenDaysContent.classList.add('hidden');
+});
+
+const dropDownMenuButton = document.querySelector('#dropdown-button');
+const footer = document.querySelector('footer');
+dropDownMenuButton.addEventListener('click', ()=>{
+  footer.classList.toggle('hidden');
+});
 
 async function getWeather(location){
   const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=fd9968291ee44909811121131231704&q=${location}&days=7&aqi=no&alerts=no`/*, {mode: 'cors'}*/)
   const weatherData = await response.json();
   return weatherData;
-  // actual.textContent = `${weatherData.current.temp_c}°C`;
-  // min.textContent = `${weatherData.forecast.forecastday[0].day.mintemp_c}°C`
-  // max.textContent = `${weatherData.forecast.forecastday[0].day.maxtemp_c}°C`
-}
-
-const displayCards = () =>{
-  i = 0;
-  for (i;i<7;i++){
-    const dayContainer = document.createElement('div');
-    const iconContainer = document.createElement('div');
-    iconContainer.classList = `weather-icon ${i}`;
-    const maxContainer = document.createElement('div');
-    maxContainer.classList = `max ${i}`;
-    const minContainer = document.createElement('div');
-    minContainer.classList = `min ${i}`;
-    dayContainer.innerHTML = "<h1></h1>";
-    dayContainer.classList = `day ${i}`;
-    iconContainer.innerHTML = `<img id='weather-icon' scr=''></img>`;
-    maxContainer.innerHTML = "<h2>Max</h2><h3></h3>";
-    minContainer.innerHTML = "<h2>Min</h2><h3></h3>";
-    const dayCard = document.createElement('div')
-    dayCard.classList = `weather-card ${i}`;
-    dayCard.appendChild(dayContainer);
-    dayCard.appendChild(iconContainer);
-    dayCard.appendChild(maxContainer);
-    dayCard.appendChild(minContainer);
-    // if(i == 0){
-    //   const actualContainer = document.createElement('div');
-    //   actualContainer.classList = `actual ${i}`;
-    //   actualContainer.innerHTML = "<h2>Now</h2><h3>4</h3>";
-    //   dayCard.appendChild(actualContainer);
-    // }
-    weatherContainer.appendChild(dayCard)
-  }
-}
-
-const hideCards = () => {
-  for(let i=0;i<7;i++){
-    const dayContainer = document.getElementsByClassName(`day ${i}`)
-    const iconContainer = document.getElementsByClassName(`weather-icon ${i}`)
-    const maxContainer = document.getElementsByClassName(`max ${i}`)
-    const minContainer = document.getElementsByClassName(`min ${i}`)
-    const actualContainer = document.getElementsByClassName(`actual ${i}`)
-    dayContainer[0].remove();
-    iconContainer[0].remove();
-    maxContainer[0].remove();
-    minContainer[0].remove();
-    // if(i == 0){
-    //   actualContainer[0].remove();
-    // }
-    weatherContainer.removeChild(weatherContainer.lastChild)
-  }
-}
-
-const displayTodayCard = () => {
-  const todayCard = document.createElement('div');
-  todayCard.classList = 'today-card';
-  todayCard.innerHTML = "<h1></h1>";
-  todayCard.innerHTML += `<img id='weather-icon' scr=''></img>`;
-  todayCard.innerHTML += `<h2>Max</h2><h3></h3>`;
-  todayCard.innerHTML += `<h2>Min</h2><h3></h3>`;
-  weatherContainer.appendChild(todayCard)
-}
-
-const displayLocation = () => {
-  const locationContainer = document.querySelector('.location-container');
-  const city = document.createElement('h2');
-  city.id = 'city'
-  const region = document.createElement('h2');
-  region.id = 'region'
-  const country = document.createElement('h2');
-  country.id = 'country'
-  locationContainer.appendChild(city)
-  locationContainer.appendChild(region)
-  locationContainer.appendChild(country)
-}
-
-async function updateLocationDOM(weatherData){
-  document.querySelector('#city').textContent = `${weatherData.location.name}, `
-  document.querySelector('#region').textContent = `${weatherData.location.region}, `
-  document.querySelector('#country').textContent = `${weatherData.location.country}`
-}
-
-const dropDownMenu = (dropDownMenuElement,dropDownMenuButton) =>{
-  const dropDownMenu = document.querySelector(dropDownMenuElement);
-  const dropDownButton = document.querySelector(dropDownMenuButton);
-  dropDownButton.addEventListener('click', () =>{
-      dropDownMenu.classList.toggle("invisible");
-  });
 }
 
 async function getLocation(){
   const response = await fetch('https://ipgeolocation.abstractapi.com/v1/?api_key=ac5315262a84431ca98e97e12f8c845f', {mode: 'cors'})
   const locationData = await response.json();
+  console.log(locationData)
   return locationData;
 }
 
 async function defaultForecast(){
   const userLocation = await getLocation();
+  const locationContainer = document.querySelector('#location-container');
+  locationContainer.textContent = `${userLocation.city}, ${userLocation.region}`;
   const userLocationWeather = await getWeather(userLocation.city);
   updateWeather(userLocationWeather)
 }
 
-const content = document.querySelector('.content')
-const weatherContainer = document.querySelector('.weather-container')
-const searchBar = document.querySelector('.search-bar')
-searchBar.addEventListener('blur',async ()=>{
-  let weatherData = await getWeather(searchBar.value)
-  updateWeather(weatherData);
-});
+const updateWeather = (weatherData) =>{
+  const weatherIcon = document.querySelector('#weather-icon');
+  const todayMax = document.querySelectorAll('#today-max');
+  const todayMin = document.querySelector('#today-min');
+  const todayNow = document.querySelector('#today-now');
+  const todayWind = document.querySelector('#today-wind');
+  const todayHumidity = document.querySelector('#today-humidity');
+  const todayRainChance = document.querySelector('#today-rain-chance');
+  let weatherCondition = weatherData.current.condition.text;
+  weatherIcon.src = checkWeatherCondition(weatherCondition);
+  todayMax.textContent = `${weatherData.forecast.forecastday[0].day.maxtemp_c}°`;
+  todayMin.textContent = `${weatherData.forecast.forecastday[0].day.mintemp_c}°`;
+  todayNow.textContent = `${weatherData.current.temp_c}°`;
+  todayWind.textContent = `${weatherData.current.wind_kph} km/h`;
+  todayHumidity.textContent = `${weatherData.current.humidity}%`;
+  todayRainChance.textContent = `${weatherData.current.precip_mm} mm`;
+  console.log(weatherData);
+}
 
-const todayForecastButton = document.querySelector('.today-forecast-button');
+const checkWeatherCondition = (weatherCondition) =>{
+  let currentDate = new Date();
+  while(currentDate.getHours() < 20 && currentDate.getHours() > 7){
+    if(weatherCondition == 'Sunny'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Partly Cloudy'){
+      return './src/weather/partly_cloudy_night_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Cloudy'){
+      return './src/weather/cloudy_FILL0_wght400_GRAD0_opsz48';
+    }
+    if(weatherCondition == 'Overcast'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Mist'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Patchy rain possible'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Patchy snow possible'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Thundery outbreaks possible'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Blowing snow'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Blizzard'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Fog'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Freezing fog'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Patchy light drizzle'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Light drizzle'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Freezing drizzle'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Heavy freezing dreezle'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Patchy light rain'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Light rain'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Moderate rain at times'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Moderate rain'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Heavy rain at times'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Heavy rain'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Light freezing rain'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Moderate or heavy freezing rain'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Light sleet'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Moderate or heavy sleet'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Patchy light snow'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Light snow'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Patchy moderate snow'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Moderate snow'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Patchy heavy snow'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Heavy snow'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Ice pellets'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Light rain shower'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Moderate or heavy rain shower'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Torrential rain shower'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Light sleet shower'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Moderate or heavy sleet shower'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Light snow shower'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Moderate or heavy snow shower'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Light showers of ice pellets'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Moderate or heavy showers of ice pellets'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Patchy light rain with thunder'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Moderate or heavy rain with thunder'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Patchy light snow with thunder'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+    if(weatherCondition == 'Moderate or heavy snow with thunder'){
+      return './src/weather/clear_day_FILL0_wght400_GRAD0_opsz48.svg';
+    }
+  }
 
-todayForecastButton.addEventListener('click', async ()=>{
-  hideCards();
-  displayTodayCard();
-})
+}
 
-dropDownMenu(".dropdown-menu","#dropdown-menu-button");
-displayLocation();
-displayCards();
 defaultForecast();
